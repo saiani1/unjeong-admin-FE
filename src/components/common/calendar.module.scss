@@ -1,0 +1,125 @@
+.wrap {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(#888, 0.2);
+
+  .top-wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+    padding-top: 30px;
+
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 30px;
+      height: 30px;
+
+      svg {
+        margin-right: 1px;
+
+        &.right {
+          margin-left: 2px;
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    h2 {
+      font-size: 1.45rem;
+      color: #666;
+    }
+  }
+
+  .day-wrap {
+    display: flex;
+    justify-content: space-around;
+    padding: 5px 20px;
+    margin-bottom: 5px;
+    background-color: #eee;
+
+    .day {
+      width: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-align: center;
+      color: #999;
+
+      &.sunday {
+        color: rgba(#A6242F, 0.7);
+      }
+
+      &.saturday {
+        color: rgba(#2C5E7F, 0.7);
+      }
+    }
+  }
+
+  .dates-wrap {
+    padding-bottom: 30px;
+
+    .week-wrap {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      padding: 0 20px;
+
+      li {
+        .date {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 40px;
+          height: 40px;
+          padding-bottom: 5px;
+          font-size: 1.1rem;
+          font-weight: 500;
+          color: #777;
+          // background-color: pink;
+          border-radius: 5px;
+
+          &:hover {
+            background-color: #eee;
+          }
+
+          &.disable {
+            opacity: 0.3;
+            pointer-events: none;
+
+            &:hover {
+              background: none;
+            }
+          }
+
+          &.sunday {
+            color: #A6242F;
+          }
+
+          &.saturday {
+            color: #2C5E7F;
+          }
+
+          .isAppointment {
+            position: absolute;
+            bottom: 4px;
+            width: 4.5px;
+            height: 4.5px;
+            background-color: #CF8BFC;
+            border-radius: 50%;
+          }
+        }
+
+        &~li {
+          margin-top: 10px;
+        }
+      }
+
+
+
+    }
+
+  }
+}

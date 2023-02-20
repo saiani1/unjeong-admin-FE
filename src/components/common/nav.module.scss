@@ -1,0 +1,32 @@
+.wrap {
+  position: fixed;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eee;
+  width: 100%;
+
+  button {
+    display: flex;
+    align-items: center;
+    margin-top: -2px;
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    color: #999;
+
+    ~button::before {
+      margin-right: 20px;
+      content: ' ';
+      display: block;
+      width: 1px;
+      height: 13px;
+      background-color: #aaa;
+    }
+
+    &.active {
+      font-weight: 600;
+      color: #555;
+    }
+  }
+}

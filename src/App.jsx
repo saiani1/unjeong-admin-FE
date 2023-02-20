@@ -15,7 +15,7 @@ function App() {
 
   return (
     <div>
-      <Header />
+      {authCtx.isLogin && <Header />}
       <Routes>
         <Route path='/' element={!authCtx.isLogin ? <Login /> : <Main />} />
         {!authCtx.isLogin && (
