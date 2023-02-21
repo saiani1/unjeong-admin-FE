@@ -6,11 +6,14 @@ import dayjs from 'dayjs';
 import styles from './calendar.module.scss';
 import transformOneMonth from '../../util/transformOneMonth';
 import { ArrowIcon } from '../../assets/svg/index';
-import { getMonthAppointment } from '../../store/api/appointment';
+import {
+  getMonthAppointment,
+  getThisDayAppointment,
+} from '../../store/api/appointment';
 
 const cx = classNames.bind(styles);
 
-function Calendar() {
+function Calendar({ setDateAppointment }) {
   const [dateArr, setDateArr] = useState([]);
   const [clickDate, setClickDate] = useState('');
   const [monthAppointment, setMonthAppointment] = useState();
@@ -40,7 +43,9 @@ function Calendar() {
   const dateBtnClickHandler = useCallback(
     e => {
       setClickDate(e.target.name);
-      console.log(e.target.name);
+      getThisDayAppointment(e.target.name, token)
+        .then(res => setDateAppointment(res.data.data))
+        .catch(err => console.log(err));
     },
     [clickDate],
   );
@@ -80,15 +85,25 @@ function Calendar() {
                     type='button'
                     className={cx(
                       'date',
+                      {
+                        active:
+                          date !== '00' &&
+                          clickDate === `${titArr[0]}-${titArr[1]}-${date}`,
+                      },
                       { sunday: index === 0 },
                       { saturday: index === 6 },
-                      { disable: date === 0 },
+                      {
+                        disable:
+                          date === '00' ||
+                          (monthAppointment &&
+                            !monthAppointment[date - 1].existAppointment),
+                      },
                     )}
                     onClick={dateBtnClickHandler}
                     name={`${titArr[0]}-${titArr[1]}-${date}`}
                   >
-                    {date === 0 ? ' ' : date}
-                    {date !== 0 &&
+                    {date === '00' ? ' ' : date}
+                    {date !== '00' &&
                       monthAppointment &&
                       monthAppointment[date - 1].existAppointment && (
                         <span className={cx('isAppointment')} />

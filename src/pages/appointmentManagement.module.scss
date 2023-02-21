@@ -1,0 +1,75 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 40px 100px;
+  width: 100%;
+  height: 100vh;
+  background-color: #F8F8F8;
+  overflow: auto;
+
+  .tit-wrap {
+    h2 {
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+      color: #666;
+    }
+
+    p {
+      font-size: 0.85rem;
+      color: #888
+    }
+  }
+
+  .appointment-status-wrap {
+    width: 100%;
+
+    .appointment-info {
+      font-size: 0.9rem;
+      color: #666;
+
+      strong {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #555;
+      }
+    }
+
+    .types {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 8px;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      color: #777;
+      border-radius: 5px;
+
+      li {
+        position: relative;
+        padding-left: 7px;
+
+        &~li {
+          margin-left: 23px;
+        }
+
+        &::before {
+          content: '';
+          width: 8px;
+          height: 8px;
+          display: block;
+          position: absolute;
+          top: 7px;
+          left: -8px;
+          border-radius: 50%;
+        }
+      }
+
+      .standby::before {
+        background-color: #CF8BFC;
+      }
+
+      .completed::before {
+        background-color: #FDDC3F;
+      }
+    }
+  }
+}

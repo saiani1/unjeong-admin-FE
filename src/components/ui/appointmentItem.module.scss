@@ -1,0 +1,73 @@
+.appointmentItem-wrap {
+  padding: 13px;
+  width: 100%;
+  border-radius: 5px;
+  color: #666;
+  background-color: #FFF;
+  box-shadow: 0 0 10px rgba(#ccc, 0.5);
+
+  .title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 35px 2px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      display: block;
+      position: absolute;
+      top: 11px;
+      left: -18px;
+      border-radius: 50%;
+    }
+
+    &.WAITING::before {
+      background-color: #CF8BFC;
+    }
+
+    &.DONE::before {
+      background-color: #FDDC3F;
+    }
+
+    svg {
+      position: absolute;
+      top: 43%;
+      right: -25px;
+      display: block;
+
+      &.close {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .more {
+    padding: 20px 15px 0;
+    color: #777;
+
+    ul {
+      margin-bottom: 10px;
+      font-size: 1rem;
+
+      li {
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: row;
+
+        span:first-child {
+          flex: 0.4;
+          font-weight: bold;
+        }
+
+        span:last-child {
+          flex: 0.6;
+        }
+      }
+    }
+  }
+}

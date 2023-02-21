@@ -3,12 +3,12 @@ import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import Login from './pages/Login';
-import Main from './pages/Main';
 import AppointmentManagement from './pages/AppointmentManagement';
 import CancelAppointmentManagement from './pages/CancelAppointmentManagement';
 import VacationManagement from './pages/VacationManagement';
 import AuthContext from './store/auth-context';
 import Header from './components/common/Header';
+import Menu from './components/common/Menu';
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -17,13 +17,12 @@ function App() {
     <div>
       {authCtx.isLogin && <Header />}
       <Routes>
-        <Route path='/' element={!authCtx.isLogin ? <Login /> : <Main />} />
+        <Route
+          path='/'
+          element={!authCtx.isLogin ? <Login /> : <AppointmentManagement />}
+        />
         {!authCtx.isLogin && (
           <>
-            <Route
-              path='appointmentManagement'
-              element={<AppointmentManagement />}
-            />
             <Route
               path='cancelAppointmentManagement'
               element={<CancelAppointmentManagement />}
@@ -32,6 +31,7 @@ function App() {
           </>
         )}
       </Routes>
+      {authCtx.isLogin && <Menu />}
       <Toaster
         containerStyle={{
           top: 20,

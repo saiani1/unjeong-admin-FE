@@ -17,6 +17,7 @@
     "import/prefer-default-export": "off",
     "react/prop-types": 0,
     "no-unused-vars": "warn",
+    "no-array-index-key": "off",
     "jsx-a11y/label-has-associated-control": [
       "error",
       {

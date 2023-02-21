@@ -2,8 +2,12 @@ import { basicRequest } from './base';
 
 const SERVICE = '/api/admin/appointment';
 
-export const getTodayAppointment = async date => {
-  const res = await basicRequest.get(`${SERVICE}/${date}`);
+export const getThisDayAppointment = async (date, token) => {
+  const res = await basicRequest.get(`${SERVICE}?date=${date}`, {
+    headers: {
+      Authorization: token,
+    },
+  });
   return res;
 };
 

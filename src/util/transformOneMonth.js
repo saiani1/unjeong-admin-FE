@@ -13,7 +13,7 @@ function transform({ TODAY }) {
 
     if (firstWeek > 0) {
       while (firstWeek > 0) {
-        tmpArr.push(0);
+        tmpArr.push('00');
         firstWeek -= 1;
         if (firstWeek === 0) break;
       }
@@ -23,7 +23,8 @@ function transform({ TODAY }) {
     let isLastDate = false;
 
     for (let j = 0; j < 7 - firstWeek; j += 1) {
-      tmpArr.push(date);
+      if (date < 10) tmpArr.push(`0${date}`);
+      else tmpArr.push(String(date));
       if (!isLastDate) {
         if (date === Number(lastDate[0])) {
           isLastDate = true;
