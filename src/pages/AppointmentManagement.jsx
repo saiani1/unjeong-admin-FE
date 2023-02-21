@@ -5,19 +5,19 @@ import classNames from 'classnames/bind';
 import styles from './appointmentManagement.module.scss';
 import Calendar from '../components/common/Calendar';
 import AppointmentItem from '../components/ui/AppointmentItem';
+import Title from '../components/common/Title';
 
 const cx = classNames.bind(styles);
 
 function AppointmentManagement() {
   const [dateAppointment, setDateAppointment] = useState();
 
-  console.log(dateAppointment);
   return (
     <div className={cx('wrap')}>
-      <div className={cx('tit-wrap')}>
-        <h2>월별 예약현황</h2>
-        <p>날짜를 누르시면 날짜별 예약조회가 가능합니다.</p>
-      </div>
+      <Title
+        name='월별 예약현황'
+        content='날짜를 누르시면 날짜별 예약조회를 합니다.'
+      />
       <Calendar setDateAppointment={setDateAppointment} />
       {dateAppointment && (
         <div className={cx('appointment-status-wrap')}>

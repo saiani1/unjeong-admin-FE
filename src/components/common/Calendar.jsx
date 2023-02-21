@@ -12,15 +12,16 @@ import {
 } from '../../store/api/appointment';
 
 const cx = classNames.bind(styles);
+const TODAY = dayjs().format('YYYY-MM-DD');
 
 function Calendar({ setDateAppointment }) {
   const [dateArr, setDateArr] = useState([]);
   const [clickDate, setClickDate] = useState('');
+  const [changeMonth, setChangeMonth] = useState(TODAY);
   const [monthAppointment, setMonthAppointment] = useState();
   const [isFetching, setIsFetching] = useState(false);
 
-  const TODAY = dayjs().format('YYYY-MM-DD');
-  const title = dayjs(TODAY).format('YYYY.MM');
+  const title = dayjs(changeMonth).format('YYYY.MM');
   const titArr = title.split('.');
   const DAY_ARR = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
   const rawToken = localStorage.getItem('token');
@@ -29,8 +30,8 @@ function Calendar({ setDateAppointment }) {
   useEffect(() => {
     setIsFetching(false);
 
-    setDateArr(transformOneMonth(TODAY));
-    getMonthAppointment(TODAY, token)
+    setDateArr(transformOneMonth(changeMonth));
+    getMonthAppointment(changeMonth, token)
       .then(res => {
         const newArr = res.data.data.map(({ index, date, ...rest }) => rest);
         setMonthAppointment(newArr);
@@ -38,7 +39,24 @@ function Calendar({ setDateAppointment }) {
       .catch(err => console.log(err));
 
     setIsFetching(true);
-  }, []);
+  }, [changeMonth]);
+
+  const changeMonthClickHandler = useCallback(
+    e => {
+      const btnName = e.target.name;
+      if (btnName === 'prev')
+        setChangeMonth(
+          dayjs(changeMonth).add(-1, 'month').format('YYYY-MM-DD'),
+        );
+      else
+        setChangeMonth(dayjs(changeMonth).add(1, 'month').format('YYYY-MM-DD'));
+    },
+    [changeMonth],
+  );
+
+  const todayBtnClickHandler = useCallback(() => {
+    setChangeMonth(dayjs(TODAY).format('YYYY-MM-DD'));
+  }, [changeMonth]);
 
   const dateBtnClickHandler = useCallback(
     e => {
@@ -53,11 +71,30 @@ function Calendar({ setDateAppointment }) {
   return (
     <div className={cx('wrap')}>
       <div className={cx('top-wrap')}>
-        <button type='button' aria-label='이전 달'>
+        <button
+          type='button'
+          aria-label='이전 달'
+          name='prev'
+          onClick={changeMonthClickHandler}
+        >
           <ArrowIcon className={cx('icon')} />
         </button>
-        <h2>{title}</h2>
-        <button type='button' aria-label='다음 달'>
+        <div className={cx('tit-wrap')}>
+          <h2>{title}</h2>
+          <button
+            type='button'
+            className={cx('today-btn')}
+            onClick={todayBtnClickHandler}
+          >
+            오늘
+          </button>
+        </div>
+        <button
+          type='button'
+          aria-label='다음 달'
+          name='next'
+          onClick={changeMonthClickHandler}
+        >
           <ArrowIcon className={cx('icon', 'right')} />
         </button>
       </div>

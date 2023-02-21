@@ -21,6 +21,7 @@
 
       svg {
         margin-right: 1px;
+        pointer-events: none;
 
         &.right {
           margin-left: 2px;
@@ -29,10 +30,28 @@
       }
     }
 
-    h2 {
-      font-size: 1.45rem;
-      color: #666;
+    .tit-wrap {
+      display: flex;
+      column-gap: 10px;
+
+      h2 {
+        font-size: 1.45rem;
+        color: #666;
+      }
+
+      .today-btn {
+        margin-top: 9.5px;
+        padding: 10px 0;
+        width: 30px;
+        height: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #666;
+        border-radius: 3px;
+        background-color: #ddd;
+      }
     }
+
   }
 
   .day-wrap {

@@ -5,10 +5,11 @@ import styles from './title.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Title({ name }) {
+function Title({ name, content }) {
   return (
-    <div className={cx('wrap')}>
-      <h1>🗓️ {name}</h1>
+    <div className={cx('tit-wrap')}>
+      <h2>{name}</h2>
+      <p>{content}</p>
     </div>
   );
 }
