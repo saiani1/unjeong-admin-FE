@@ -1,6 +1,6 @@
 .appointmentItem-wrap {
   padding: 13px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
   border-radius: 5px;
   color: #666;
@@ -48,17 +48,17 @@
 
   .more {
     padding: 20px 15px 0;
-    color: #777;
+    color: #888;
 
     ul {
       margin-bottom: 10px;
-      font-size: 1rem;
+      font-size: 0.95rem;
 
       li {
-        width: 100%;
-        margin-bottom: 7px;
         display: flex;
         flex-direction: row;
+        margin-bottom: 7px;
+        width: 100%;
 
         span:first-child {
           flex: 0.4;

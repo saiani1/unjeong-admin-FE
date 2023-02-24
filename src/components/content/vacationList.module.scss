@@ -1,0 +1,38 @@
+.vacation-wrap {
+  .info {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #666;
+
+    strong {
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+  }
+
+  .vacation-item-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 13px 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    border-radius: 5px;
+    color: #666;
+    background-color: #FFF;
+    box-shadow: 0 0 10px rgba(#ccc, 0.5);
+
+    span {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    button {
+      padding: 4px 10px;
+      font-weight: 600;
+      color: #666;
+      border-radius: 3px;
+      background-color: #FDDC3F;
+    }
+  }
+}

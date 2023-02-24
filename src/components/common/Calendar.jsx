@@ -1,29 +1,32 @@
 /* eslint-disable react/no-array-index-key */
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 import classNames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import styles from './calendar.module.scss';
 import transformOneMonth from '../../util/transformOneMonth';
 import { ArrowIcon } from '../../assets/svg/index';
-import {
-  getMonthAppointment,
-  getThisDayAppointment,
-} from '../../store/api/appointment';
+import { getMonthAppointment } from '../../store/api/appointment';
 
 const cx = classNames.bind(styles);
 const TODAY = dayjs().format('YYYY-MM-DD');
 
-function Calendar({ setDateAppointment }) {
+function Calendar({
+  page,
+  clickDate,
+  setClickDate,
+  monthAppointment,
+  setMonthAppointment,
+  setOpenAlert,
+}) {
   const [dateArr, setDateArr] = useState([]);
-  const [clickDate, setClickDate] = useState('');
   const [changeMonth, setChangeMonth] = useState(TODAY);
-  const [monthAppointment, setMonthAppointment] = useState();
   const [isFetching, setIsFetching] = useState(false);
 
   const title = dayjs(changeMonth).format('YYYY.MM');
   const titArr = title.split('.');
   const DAY_ARR = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+
   const rawToken = localStorage.getItem('token');
   const token = JSON.parse(rawToken);
 
@@ -31,13 +34,13 @@ function Calendar({ setDateAppointment }) {
     setIsFetching(false);
 
     setDateArr(transformOneMonth(changeMonth));
-    getMonthAppointment(changeMonth, token)
-      .then(res => {
-        const newArr = res.data.data.map(({ index, date, ...rest }) => rest);
-        setMonthAppointment(newArr);
-      })
-      .catch(err => console.log(err));
-
+    if (page === 'appointment')
+      getMonthAppointment(changeMonth, token)
+        .then(res => {
+          const newArr = res.data.data.map(({ index, date, ...rest }) => rest);
+          setMonthAppointment(newArr);
+        })
+        .catch(err => console.log(err));
     setIsFetching(true);
   }, [changeMonth]);
 
@@ -61,9 +64,7 @@ function Calendar({ setDateAppointment }) {
   const dateBtnClickHandler = useCallback(
     e => {
       setClickDate(e.target.name);
-      getThisDayAppointment(e.target.name, token)
-        .then(res => setDateAppointment(res.data.data))
-        .catch(err => console.log(err));
+      if (page === 'vacation') setOpenAlert(true);
     },
     [clickDate],
   );
@@ -86,7 +87,7 @@ function Calendar({ setDateAppointment }) {
             className={cx('today-btn')}
             onClick={todayBtnClickHandler}
           >
-            오늘
+            이번달
           </button>
         </div>
         <button
@@ -132,7 +133,8 @@ function Calendar({ setDateAppointment }) {
                       {
                         disable:
                           date === '00' ||
-                          (monthAppointment &&
+                          (page === 'appointment' &&
+                            monthAppointment &&
                             !monthAppointment[date - 1].existAppointment),
                       },
                     )}
@@ -140,11 +142,6 @@ function Calendar({ setDateAppointment }) {
                     name={`${titArr[0]}-${titArr[1]}-${date}`}
                   >
                     {date === '00' ? ' ' : date}
-                    {date !== '00' &&
-                      monthAppointment &&
-                      monthAppointment[date - 1].existAppointment && (
-                        <span className={cx('isAppointment')} />
-                      )}
                   </button>
                 </li>
               ))}

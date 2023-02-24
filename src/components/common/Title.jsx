@@ -9,7 +9,7 @@ function Title({ name, content }) {
   return (
     <div className={cx('tit-wrap')}>
       <h2>{name}</h2>
-      <p>{content}</p>
+      <p>{content && content}</p>
     </div>
   );
 }

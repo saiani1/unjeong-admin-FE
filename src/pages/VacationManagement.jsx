@@ -1,14 +1,26 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import styles from './vacationManagement.module.scss';
+import React, { useState } from 'react';
 
-const cx = classNames.bind(styles);
+import AddVacation from '../components/content/AddVacation';
+import VacationList from '../components/content/VacationList';
 
 function VacationManagement() {
+  const [vacationData, setVacationData] = useState();
+  const [isChange, setIsChange] = useState(false);
+
   return (
-    <div>
-      <p>d</p>
-    </div>
+    <>
+      <AddVacation
+        setVacationData={setVacationData}
+        isChange={isChange}
+        setIsChange={setIsChange}
+      />
+      <VacationList
+        isChange={isChange}
+        setIsChange={setIsChange}
+        vacationData={vacationData}
+        setVacationData={setVacationData}
+      />
+    </>
   );
 }
 

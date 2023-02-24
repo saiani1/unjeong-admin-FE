@@ -35,20 +35,20 @@
       column-gap: 10px;
 
       h2 {
-        font-size: 1.45rem;
-        color: #666;
+        font-size: 1.35rem;
+        color: #777;
       }
 
       .today-btn {
-        margin-top: 9.5px;
+        margin-top: 9px;
         padding: 10px 0;
-        width: 30px;
+        width: 36px;
         height: 20px;
-        font-size: 0.8rem;
+        font-size: 0.7rem;
         font-weight: 500;
         color: #666;
         border-radius: 3px;
-        background-color: #ddd;
+        background-color: #eee;
       }
     }
 
@@ -58,7 +58,7 @@
     display: flex;
     justify-content: space-around;
     padding: 3px 20px;
-    margin-bottom: 5px;
+    margin: 5px 0 10px;
     background-color: #eee;
 
     .day {
@@ -97,8 +97,7 @@
           align-items: center;
           width: 40px;
           height: 35px;
-          padding-bottom: 8px;
-          font-size: 1.1rem;
+          font-size: 1rem;
           font-weight: 500;
           color: #777;
           border-radius: 5px;
@@ -108,7 +107,7 @@
           }
 
           &.disable {
-            opacity: 0.3;
+            opacity: 0.2;
             pointer-events: none;
 
             &:hover {
@@ -122,15 +121,6 @@
 
           &.saturday {
             color: #2C5E7F;
-          }
-
-          .isAppointment {
-            position: absolute;
-            bottom: 5px;
-            width: 4.5px;
-            height: 4.5px;
-            background-color: #CF8BFC;
-            border-radius: 50%;
           }
         }
 

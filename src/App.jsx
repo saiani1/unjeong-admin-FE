@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
+import './app.css';
 import Login from './pages/Login';
 import AppointmentManagement from './pages/AppointmentManagement';
 import CancelAppointmentManagement from './pages/CancelAppointmentManagement';
@@ -14,14 +15,14 @@ function App() {
   const authCtx = useContext(AuthContext);
 
   return (
-    <div>
+    <div className='wrap'>
       {authCtx.isLogin && <Header />}
       <Routes>
         <Route
           path='/'
           element={!authCtx.isLogin ? <Login /> : <AppointmentManagement />}
         />
-        {!authCtx.isLogin && (
+        {authCtx.isLogin && (
           <>
             <Route
               path='cancelAppointmentManagement'
