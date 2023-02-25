@@ -8,21 +8,19 @@ export const getVacationDays = async () => {
 };
 
 export const addVacationDay = async (date, token) => {
-  const res = await basicRequest.post(
-    SERVICE,
-    { vacationDate: date },
-    {
-      headers: {
-        Authorization: token,
-      },
+  const params = { vacationDate: date };
+  const res = await basicRequest.post(SERVICE, params, {
+    headers: {
+      Authorization: token,
     },
-  );
+  });
   return res;
 };
 
 export const cancelVacationDay = async (date, token) => {
+  const params = { vacationDate: date };
   const res = await basicRequest.delete(SERVICE, {
-    data: { vacationDate: date },
+    data: params,
     headers: {
       Authorization: token,
     },
