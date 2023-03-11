@@ -1,12 +1,14 @@
 /* eslint-disable no-nested-ternary */
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './appointmentItem.module.scss';
+import CustomAlert from '../common/CustomAlert';
 
 const cx = classNames.bind(styles);
 
-function AppointmentItem({ page, data }) {
+function AppointmentItem({ page, data, setIsChange }) {
+  const [openAlert, setOpenAlert] = useState(false);
   const state =
     page === 'view'
       ? data.appointmentState
@@ -39,9 +41,23 @@ function AppointmentItem({ page, data }) {
     page === 'view'
       ? data.numberOfPeople
       : data.appointmentList[0].numberOfPeople;
+  const isRecheduled =
+    page === 'cancel' ? data.appointmentList[0].isRescheduled : '';
+
+  const contactBtnClickHandler = useCallback(() => {
+    setOpenAlert(true);
+  }, [openAlert]);
 
   return (
     <li className={cx('appointmentItem-wrap')}>
+      {openAlert && (
+        <CustomAlert
+          page='cancel'
+          title={data}
+          setOpenAlert={setOpenAlert}
+          setIsChange={setIsChange}
+        />
+      )}
       <div className={cx('title', state)}>
         <span>{date}</span>
         <span>{hour}</span>
@@ -54,7 +70,9 @@ function AppointmentItem({ page, data }) {
           </li>
           <li>
             <span>연락처</span>
-            <span>{data.phone}</span>
+            <span>
+              {data.phone.replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`)}
+            </span>
           </li>
           <li>
             <span>예약상태</span>
@@ -70,6 +88,16 @@ function AppointmentItem({ page, data }) {
           </li>
         </ul>
       </div>
+      {page === 'cancel' && (
+        <button
+          type='button'
+          className={cx('contact-btn', isRecheduled ? 'done' : '')}
+          onClick={contactBtnClickHandler}
+          disabled={isRecheduled}
+        >
+          {isRecheduled ? '예약조정 완료' : '예약조정 완료하기'}
+        </button>
+      )}
     </li>
   );
 }

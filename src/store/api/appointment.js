@@ -28,3 +28,16 @@ export const getRequireContactCustomer = async token => {
   });
   return res;
 };
+
+export const rescheduledCustomer = async (code, token) => {
+  const res = await basicRequest.post(
+    `${SERVICE}/reschedule/${code}`,
+    {},
+    {
+      headers: {
+        Authorization: token,
+      },
+    },
+  );
+  return res;
+};

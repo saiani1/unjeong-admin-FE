@@ -30,8 +30,9 @@ function VacationList({
     <>
       {openAlert && (
         <CustomAlert
+          page='vacation'
           status='cancel'
-          date={clickDate}
+          title={clickDate}
           setOpenAlert={setOpenAlert}
           setIsChange={setIsChange}
         />

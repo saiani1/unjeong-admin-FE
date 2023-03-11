@@ -6,7 +6,8 @@ import AppointmentItem from '../ui/AppointmentItem';
 
 const cx = classNames.bind(styles);
 
-function AppointmentList({ page, appointmentData }) {
+function AppointmentList({ page, appointmentData, setIsChange }) {
+  console.log(appointmentData);
   return (
     <>
       <ul className={cx('types')}>
@@ -20,6 +21,7 @@ function AppointmentList({ page, appointmentData }) {
               key={appointment.index}
               data={appointment}
               page={page}
+              setIsChange={setIsChange}
             />
           ))}
       </ul>

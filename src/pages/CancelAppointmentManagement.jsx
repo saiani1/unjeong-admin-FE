@@ -12,6 +12,7 @@ function CancelAppointmentManagement() {
   const rawToken = localStorage.getItem('token');
   const token = JSON.parse(rawToken);
   const [appointmentData, setAppointmentData] = useState();
+  const [isChange, setIsChange] = useState(false);
 
   useEffect(() => {
     getRequireContactCustomer(token)
@@ -19,7 +20,7 @@ function CancelAppointmentManagement() {
         setAppointmentData(res.data.data);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [isChange]);
 
   return (
     <div className={cx('cancel-wrap')}>
@@ -34,7 +35,11 @@ function CancelAppointmentManagement() {
             : '검색된 예약이 없습니다.'}
         </span>
         {appointmentData && appointmentData.length !== 0 && (
-          <AppointmentList appointmentData={appointmentData} page='cancel' />
+          <AppointmentList
+            appointmentData={appointmentData}
+            page='cancel'
+            setIsChange={setIsChange}
+          />
         )}
       </div>
     </div>

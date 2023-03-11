@@ -12,8 +12,9 @@ function AddVacation({ setIsChange }) {
     <>
       {openAlert && (
         <CustomAlert
+          page='vacation'
           status='add'
-          date={clickDate}
+          title={clickDate}
           setOpenAlert={setOpenAlert}
           setIsChange={setIsChange}
         />
