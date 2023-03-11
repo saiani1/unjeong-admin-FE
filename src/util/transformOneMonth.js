@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import dayjs from 'dayjs';
 
-function transform({ TODAY }) {
+function transform(TODAY) {
   const firstDate = dayjs(TODAY).startOf('month').format('D d').split(' ');
   const lastDate = dayjs(TODAY).endOf('month').format('D d').split(' ');
   const dateArr = [];

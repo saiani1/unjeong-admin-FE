@@ -37,7 +37,7 @@ function Login() {
           authCtx.login(JSON.stringify(res.headers.authorization));
           toast.success('로그인 되었습니다.');
         })
-        .catch(err => console.log(err));
+        .catch(err => toast.error(err.response.data.errorMessage));
     }
   };
 

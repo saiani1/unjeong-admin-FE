@@ -39,9 +39,10 @@ function Calendar({
         .then(res => {
           const newArr = res.data.data.map(({ index, date, ...rest }) => rest);
           setMonthAppointment(newArr);
+          setIsFetching(true);
         })
         .catch(err => console.log(err));
-    setIsFetching(true);
+    else setIsFetching(true);
   }, [changeMonth]);
 
   const changeMonthClickHandler = useCallback(
@@ -135,7 +136,8 @@ function Calendar({
                           date === '00' ||
                           (page === 'appointment' &&
                             monthAppointment &&
-                            !monthAppointment[date - 1].existAppointment),
+                            !monthAppointment[date - 1].existAppointment) ||
+                          undefined,
                       },
                     )}
                     onClick={dateBtnClickHandler}

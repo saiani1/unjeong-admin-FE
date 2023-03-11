@@ -3,7 +3,9 @@ import { basicRequest } from './base';
 const SERVICE = '/api/admin/appointment';
 
 export const getThisDayAppointment = async (date, token) => {
-  const res = await basicRequest.get(`${SERVICE}?date=${date}`, {
+  const params = { date };
+  const res = await basicRequest.get(SERVICE, {
+    params,
     headers: {
       Authorization: token,
     },
@@ -12,7 +14,9 @@ export const getThisDayAppointment = async (date, token) => {
 };
 
 export const getMonthAppointment = async (date, token) => {
-  const res = await basicRequest.get(`${SERVICE}/daily?date=${date}`, {
+  const params = { date };
+  const res = await basicRequest.get(`${SERVICE}/daily`, {
+    params,
     headers: {
       Authorization: token,
     },
