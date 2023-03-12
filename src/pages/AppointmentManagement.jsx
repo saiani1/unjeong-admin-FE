@@ -46,7 +46,7 @@ function AppointmentManagement() {
               총 <strong>{dateAppointment.length}</strong>건 조회되었습니다.
             </span>
           </div>
-          <AppointmentList appointmentData={dateAppointment} page='view' />
+          <AppointmentList appointmentData={dateAppointment} />
         </>
       )}
     </div>

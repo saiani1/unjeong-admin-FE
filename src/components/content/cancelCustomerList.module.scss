@@ -1,0 +1,56 @@
+.cancelCustomerList-wrap {
+  margin-bottom: 10px;
+  padding: 25px 35px;
+  width: 100%;
+  border-radius: 5px;
+  color: #666;
+  background-color: #FFF;
+  box-shadow: 0 0 10px rgba(#ccc, 0.5);
+
+  .title {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+
+  .more {
+    padding: 15px 0;
+    color: #888;
+
+    ul {
+      font-size: 1rem;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        span:first-child {
+          font-weight: bold;
+        }
+
+        &~li {
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+
+  .contact-btn {
+    margin-top: 5px;
+    padding: 4px 10px;
+    width: 100%;
+    font-size: 0.93rem;
+    font-weight: 600;
+    color: #666;
+    border-radius: 3px;
+    background-color: #FDDC3F;
+
+    &.done {
+      background-color: #ddd;
+      color: #999;
+    }
+  }
+}
