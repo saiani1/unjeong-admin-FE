@@ -6,6 +6,11 @@
   border-radius: 10px;
   box-shadow: 0 0 8px rgba(#888, 0.2);
 
+  &.vacation {
+    min-height: auto;
+    max-height: 350px;
+  }
+
   .top-wrap {
     display: flex;
     justify-content: space-around;

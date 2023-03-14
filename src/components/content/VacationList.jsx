@@ -1,30 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './vacationList.module.scss';
-import { getVacationDays } from '../../store/api/vacation';
 import CustomAlert from '../common/CustomAlert';
 import VacationItem from '../ui/VacationItem';
 
 const cx = classNames.bind(styles);
 
-function VacationList({
-  isChange,
-  setIsChange,
-  vacationData,
-  setVacationData,
-}) {
+function VacationList({ setIsChange, vacationData }) {
   const [clickDate, setClickDate] = useState('');
   const [openAlert, setOpenAlert] = useState(false);
-
-  useEffect(() => {
-    getVacationDays()
-      .then(res => {
-        setVacationData(res.data.data);
-        setIsChange(false);
-      })
-      .catch(err => console.error(err));
-  }, [isChange]);
 
   return (
     <>

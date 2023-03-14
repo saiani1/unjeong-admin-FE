@@ -11,13 +11,11 @@ import { getMonthAppointment } from '../../store/api/appointment';
 const cx = classNames.bind(styles);
 const TODAY = dayjs().format('YYYY-MM-DD');
 
-function Calendar({
-  page,
+function AppointmentCalendar({
   clickDate,
   setClickDate,
   monthAppointment,
   setMonthAppointment,
-  setOpenAlert,
 }) {
   const [dateArr, setDateArr] = useState([]);
   const [changeMonth, setChangeMonth] = useState(TODAY);
@@ -34,15 +32,13 @@ function Calendar({
     setIsFetching(false);
 
     setDateArr(transformOneMonth(changeMonth));
-    if (page === 'appointment')
-      getMonthAppointment(changeMonth, token)
-        .then(res => {
-          const newArr = res.data.data.map(({ index, date, ...rest }) => rest);
-          setMonthAppointment(newArr);
-          setIsFetching(true);
-        })
-        .catch(err => console.log(err));
-    else setIsFetching(true);
+    getMonthAppointment(changeMonth, token)
+      .then(res => {
+        const newArr = res.data.data.map(({ index, date, ...rest }) => rest);
+        setMonthAppointment(newArr);
+        setIsFetching(true);
+      })
+      .catch(err => console.log(err));
   }, [changeMonth]);
 
   const changeMonthClickHandler = useCallback(
@@ -65,7 +61,6 @@ function Calendar({
   const dateBtnClickHandler = useCallback(
     e => {
       setClickDate(e.target.name);
-      if (page === 'vacation') setOpenAlert(true);
     },
     [clickDate],
   );
@@ -134,8 +129,7 @@ function Calendar({
                       {
                         disable:
                           date === '00' ||
-                          (page === 'appointment' &&
-                            monthAppointment &&
+                          (monthAppointment &&
                             !monthAppointment[date - 1].existAppointment) ||
                           undefined,
                       },
@@ -155,4 +149,4 @@ function Calendar({
   );
 }
 
-export default Calendar;
+export default AppointmentCalendar;
